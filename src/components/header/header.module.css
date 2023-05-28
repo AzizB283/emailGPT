@@ -1,0 +1,34 @@
+.myStyle {
+  text-decoration: "none";
+  
+}
+
+
+@media (max-width: 767px){
+  .headerMenu{
+    display: none;
+    width: 20vw !important;
+
+  }
+}
+
+@media (min-width: 767px){
+  .menuIcon{
+    display: none;
+  }
+}
+
+.activeLink {
+  color: #4096FF;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+/* .menuContainer {
+  display: flex;
+  justify-content: flex-end;
+} */

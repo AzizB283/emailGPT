@@ -1,0 +1,14 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sidebarImage {
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 290px;
+    height: auto;
+    cursor: pointer;
+  }
+  

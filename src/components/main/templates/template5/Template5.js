@@ -1,0 +1,918 @@
+import React, { useState, useEffect } from "react";
+import { Input, Button, Form, Typography, Space, Modal, Avatar, Badge } from "antd";
+import "../commoncss.css";
+import "./template5.css";
+
+const { TextArea } = Input;
+const { Title } = Typography;
+
+function Template5({ data }) {
+  const [modals, setModals] = useState(false);
+  const [textareaRows, setTextareaRows] = useState(4);
+
+  const [selectedImage1, setSelectedImage1] = useState(data?.image1?.regular[0]);
+  const [selectedImage2, setSelectedImage2] = useState(data?.image2?.regular[0]);
+  const [selectedImage3, setSelectedImage3] = useState(data?.image3?.regular[0]);
+  const [selectedImage4, setSelectedImage4] = useState(data?.image4?.regular[0]);
+  const [mainImage1, setMainImage1] = useState(selectedImage1);
+  const [mainImage2, setMainImage2] = useState(selectedImage2);
+  const [mainImage3, setMainImage3] = useState(selectedImage3);
+  const [mainImage4, setMainImage4] = useState(selectedImage4);
+
+  const validateMessages = {
+    required: "${label} is required!",
+  };
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
+  const showModal = (modalId) => {
+    setModals((prevModals) => ({
+      ...prevModals,
+      [modalId]: true,
+    }));
+  };
+  const handleOk = (modalId, image) => {
+    setModals((prevModals) => ({
+      ...prevModals,
+      [modalId]: false,
+    }));
+
+    if (modalId == "image1") {
+      setMainImage1(selectedImage1)
+    }
+    if (modalId == "image2") {
+      setMainImage2(selectedImage2)
+    }
+    if (modalId == "image3") {
+      setMainImage3(selectedImage3)
+    }
+    if (modalId == "image4") {
+      setMainImage4(selectedImage4)
+    }
+  };
+  const handleCancel = (modalId) => {
+    setModals((prevModals) => ({
+      ...prevModals,
+      [modalId]: false,
+    }));
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const { innerWidth } = window;
+      if (innerWidth <= 767) {
+        setTextareaRows(4); // Set maxRows to 4 for mobile and tablet devices
+      } else {
+        setTextareaRows(20); // Set maxRows to 20 for desktop and laptop devices
+      }
+    };
+
+    handleResize(); // Call initially to set the appropriate maxRows
+    window.addEventListener("resize", handleResize); // Listen for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Cleanup listener on component unmount
+    };
+  }, []);
+
+  useEffect(() => {
+    setMainImage1(data?.image1?.regular[0])
+    setMainImage2(data?.image2?.regular[0])
+    setMainImage3(data?.image3?.regular[0])
+    setMainImage4(data?.image4?.regular[0])
+  }, [data])
+
+  return (
+    <>
+      <center>
+        <div className="tablecontainer">
+
+          <table
+            align="center"
+            border={0}
+            cellPadding={0}
+            cellSpacing={0}
+            width="100%"
+            className="templateContainer"
+          >
+            <tbody>
+              <tr>
+                <td valign="top" className="bodyContainer">
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnTextBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnTextBlockOuter">
+                      <tr>
+                        <td
+                          valign="top"
+                          className="mcnTextBlockInner"
+                          style={{ paddingTop: 9 }}
+                        >
+                          <table
+                            align="left"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            style={{ maxWidth: "100%", minWidth: "100%" }}
+                            width="100%"
+                            className="mcnTextContentContainer"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnTextContent"
+                                  style={{
+                                    paddingTop: 0,
+                                    paddingRight: 18,
+                                    paddingBottom: 9,
+                                    paddingLeft: 18,
+                                  }}
+                                >
+                                  <h1>{data.subject}</h1>
+                                  <p style={{ textAlign: "center !important" }}>
+                                    {data.body1}
+                                  </p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnDividerBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnDividerBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnDividerBlockInner"
+                          style={{ minWidth: "100%", padding: "18px 18px 0px" }}
+                        >
+                          <table
+                            className="mcnDividerContent"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            width="100%"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnImageBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnImageBlockOuter">
+                      <tr>
+                        <td
+                          valign="top"
+                          style={{ padding: 9 }}
+                          className="mcnImageBlockInner"
+                        >
+                          <table
+                            align="left"
+                            width="100%"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            className="mcnImageContentContainer"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  className="mcnImageContent"
+                                  valign="top"
+                                  style={{
+                                    paddingRight: 9,
+                                    paddingLeft: 9,
+                                    paddingTop: 0,
+                                    paddingBottom: 0,
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  <div className="image-container">
+
+                                    <div className="badge-container">
+                                      <Badge count={'Pick Another Image'} onClick={() => showModal("image1")} color="blue" />
+                                    </div>
+                                    <img
+                                      align="center"
+                                      alt=""
+                                      // src="https://cdn-images.mailchimp.com/template_images/gallery/tell-a-story-full.png"
+                                      // src={data?.image1?.small[0]}
+                                      src={mainImage1}
+                                      width={564}
+                                      style={{
+                                        maxWidth: 564,
+                                        paddingBottom: 0,
+                                        display: "inline !important",
+                                        verticalAlign: "bottom",
+                                      }}
+                                      className="mcnImage"
+                                    />
+                                  </div>
+                                  <Modal title="Basic Modal" open={modals['image1']} onOk={() => handleOk("image1")} onCancel={() => handleCancel("image1")} width={700}>
+                                    <div className="image-grid">
+                                      {data?.image1?.regular.map((image, index) => (
+
+                                        <div
+                                          key={index}
+                                          className={`image-item ${selectedImage1 === image ? "selected" : ""}`}
+                                          onClick={() => setSelectedImage1(image)}
+                                        >
+                                          <img src={image} alt="" className="modalImage" />
+                                        </div>
+                                      ))}
+                                    </div>
+
+                                  </Modal>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnTextBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnTextBlockOuter">
+                      <tr>
+                        <td
+                          valign="top"
+                          className="mcnTextBlockInner"
+                          style={{ paddingTop: 9 }}
+                        >
+                          <table
+                            align="left"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            style={{ maxWidth: "100%", minWidth: "100%" }}
+                            width="100%"
+                            className="mcnTextContentContainer"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnTextContent"
+                                  style={{
+                                    paddingTop: 0,
+                                    paddingRight: 18,
+                                    paddingBottom: 9,
+                                    paddingLeft: 18,
+                                  }}
+                                >
+                                  {/* <h4>The main story</h4> */}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnTextBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnTextBlockOuter">
+                      <tr>
+                        <td
+                          valign="top"
+                          className="mcnTextBlockInner"
+                          style={{ paddingTop: 9 }}
+                        >
+                          <table
+                            align="left"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            style={{ maxWidth: 300 }}
+                            width="100%"
+                            className="mcnTextContentContainer"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnTextContent"
+                                  style={{
+                                    paddingTop: 0,
+                                    paddingLeft: 18,
+                                    paddingBottom: 9,
+                                    paddingRight: 18,
+                                  }}
+                                >
+                                  {data.body2}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          <table
+                            align="left"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            style={{ maxWidth: 300 }}
+                            width="100%"
+                            className="mcnTextContentContainer"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnTextContent"
+                                  style={{
+                                    paddingTop: 0,
+                                    paddingLeft: 18,
+                                    paddingBottom: 9,
+                                    paddingRight: 18,
+                                  }}
+                                >
+                                  {data.body3}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnDividerBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnDividerBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnDividerBlockInner"
+                          style={{ minWidth: "100%", padding: 18 }}
+                        >
+                          <table
+                            className="mcnDividerContent"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            width="100%"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnButtonBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnButtonBlockOuter">
+                      <tr>
+                        <td
+                          style={{
+                            paddingTop: 0,
+                            paddingRight: 18,
+                            paddingBottom: 18,
+                            paddingLeft: 18,
+                          }}
+                          valign="top"
+                          align="center"
+                          className="mcnButtonBlockInner"
+                        >
+                          {/* <table
+                              border={0}
+                              cellPadding={0}
+                              cellSpacing={0}
+                              className="mcnButtonContentContainer"
+                              style={{
+                                borderCollapse: "separate !important",
+                                borderRadius: 3,
+                                backgroundColor: "#009FC7",
+                              }}
+                            >
+                              <tbody>
+                                <tr>
+                                  <td
+                                    align="center"
+                                    valign="middle"
+                                    className="mcnButtonContent"
+                                    style={{
+                                      fontFamily: "Helvetica",
+                                      fontSize: 18,
+                                      padding: 18,
+                                    }}
+                                  >
+                                    <a
+                                      className="mcnButton "
+                                      title="Read More"
+                                      href="#"
+                                      target="_blank"
+                                      style={{
+                                        fontWeight: "bold",
+                                        letterSpacing: "-0.5px",
+                                        lineHeight: "100%",
+                                        textAlign: "center",
+                                        textDecoration: "none",
+                                        color: "#FFFFFF",
+                                      }}
+                                    >
+                                      Read More
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table> */}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnDividerBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnDividerBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnDividerBlockInner"
+                          style={{ minWidth: "100%", padding: 18 }}
+                        >
+                          <table
+                            className="mcnDividerContent"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            width="100%"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnCaptionBlock"
+                  >
+                    <tbody className="mcnCaptionBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnCaptionBlockInner"
+                          valign="top"
+                          style={{ padding: 9 }}
+                        >
+                          <table
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            className="mcnCaptionRightContentOuter"
+                            width="100%"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnCaptionRightContentInner"
+                                  style={{ padding: "0 9px" }}
+                                >
+                                  <table
+                                    align="left"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="mcnCaptionRightImageContentContainer"
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          className="mcnCaptionRightImageContent"
+                                          align="center"
+                                          valign="top"
+                                        >
+                                          <div className="image-container">
+
+                                            <div className="badge-container">
+                                              <Badge count={'Pick Another Image'} onClick={() => showModal("image2")} color="blue" />
+                                            </div>
+                                            <img
+                                              alt=""
+                                              // src="https://cdn-images.mailchimp.com/template_images/gallery/tell-a-story-sm.png"
+                                              // src={data?.image2?.small[0]}
+                                              src={mainImage2}
+                                              width={264}
+                                              style={{ maxWidth: 264 }}
+                                              className="mcnImage"
+                                            />
+                                          </div>
+                                          <Modal title="Basic Modal" open={modals['image2']} onOk={() => handleOk("image2")} onCancel={() => handleCancel("image2")} width={700}>
+                                            <div className="image-grid">
+                                              {data?.image2?.regular.map((image, index) => (
+
+                                                <div
+                                                  key={index}
+                                                  className={`image-item ${selectedImage2 === image ? "selected" : ""}`}
+                                                  onClick={() => setSelectedImage2(image)}
+                                                >
+                                                  <img src={image} alt="" className="modalImage" />
+                                                </div>
+                                              ))}
+                                            </div>
+
+                                          </Modal>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table
+                                    className="mcnCaptionRightTextContentContainer"
+                                    align="right"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          valign="top"
+                                          className="mcnTextContent"
+                                        >
+                                          {/* <h3>Show off what you do</h3> */}
+                                          <p>
+                                            {data.body4}
+                                          </p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnDividerBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnDividerBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnDividerBlockInner"
+                          style={{ minWidth: "100%", padding: "27px 18px 0px" }}
+                        >
+                          <table
+                            className="mcnDividerContent"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            width="100%"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnCaptionBlock"
+                  >
+                    <tbody className="mcnCaptionBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnCaptionBlockInner"
+                          valign="top"
+                          style={{ padding: 9 }}
+                        >
+                          <table
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            className="mcnCaptionLeftContentOuter"
+                            width="100%"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnCaptionLeftContentInner"
+                                  style={{ padding: "0 9px" }}
+                                >
+                                  <table
+                                    align="right"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="mcnCaptionLeftImageContentContainer"
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          className="mcnCaptionLeftImageContent"
+                                          align="center"
+                                          valign="top"
+                                        >
+                                          <div className="image-container">
+
+                                            <div className="badge-container">
+                                              <Badge count={'Pick Another Image'} onClick={() => showModal("image3")} color="blue" />
+                                            </div>
+                                            <img
+                                              alt=""
+                                              // src="https://cdn-images.mailchimp.com/template_images/gallery/tell-a-story-sm2.png"
+                                              // src={data?.image3?.small[0]}
+                                              src={mainImage3}
+                                              width={264}
+                                              style={{ maxWidth: 264 }}
+                                              className="mcnImage"
+                                            />
+                                          </div>
+                                          <Modal title="Basic Modal" open={modals['image3']} onOk={() => handleOk("image3")} onCancel={() => handleCancel('image3')} width={700}>
+                                            <div className="image-grid">
+                                              {data?.image3?.regular.map((image, index) => (
+
+                                                <div
+                                                  key={index}
+                                                  className={`image-item ${selectedImage3 === image ? "selected" : ""}`}
+                                                  onClick={() => setSelectedImage3(image)}
+                                                >
+                                                  <img src={image} alt="" className="modalImage" />
+                                                </div>
+                                              ))}
+                                            </div>
+                                          </Modal>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table
+                                    className="mcnCaptionLeftTextContentContainer"
+                                    align="left"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          valign="top"
+                                          className="mcnTextContent"
+                                        >
+                                          {/* <h3>Make articles more visual</h3> */}
+                                          <p>
+                                            {data.body5}
+                                          </p>
+                                          {/* <p>
+                                              <a href="#">Keep Reading</a>
+                                            </p> */}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnDividerBlock"
+                    style={{ minWidth: "100%" }}
+                  >
+                    <tbody className="mcnDividerBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnDividerBlockInner"
+                          style={{ minWidth: "100%", padding: "27px 18px 0px" }}
+                        >
+                          <table
+                            className="mcnDividerContent"
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            width="100%"
+                            style={{ minWidth: "100%" }}
+                          >
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <span />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table
+                    border={0}
+                    cellPadding={0}
+                    cellSpacing={0}
+                    width="100%"
+                    className="mcnCaptionBlock"
+                  >
+                    <tbody className="mcnCaptionBlockOuter">
+                      <tr>
+                        <td
+                          className="mcnCaptionBlockInner"
+                          valign="top"
+                          style={{ padding: 9 }}
+                        >
+                          <table
+                            border={0}
+                            cellPadding={0}
+                            cellSpacing={0}
+                            className="mcnCaptionRightContentOuter"
+                            width="100%"
+                          >
+                            <tbody>
+                              <tr>
+                                <td
+                                  valign="top"
+                                  className="mcnCaptionRightContentInner"
+                                  style={{ padding: "0 9px" }}
+                                >
+                                  <table
+                                    align="left"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    className="mcnCaptionRightImageContentContainer"
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          className="mcnCaptionRightImageContent"
+                                          align="center"
+                                          valign="top"
+                                        >
+                                          <div className="image-container">
+
+                                            <div className="badge-container">
+                                              <Badge count={'Pick Another Image'} onClick={() => showModal('image4')} color="blue" />
+                                            </div>
+                                            <img
+                                              alt=""
+                                              // src="https://cdn-images.mailchimp.com/template_images/gallery/tell-a-story-sm3.png"
+                                              // src={data?.image4?.small[0]}
+                                              src={mainImage4}
+                                              width={264}
+                                              style={{ maxWidth: 264 }}
+                                              className="mcnImage"
+                                            />
+                                          </div>
+                                          <Modal title="Basic Modal" open={modals['image4']} onOk={() => handleOk("image4")} onCancel={() => handleCancel("image4")} width={700}>
+                                            <div className="image-grid">
+                                              {data?.image4?.regular.map((image, index) => (
+
+                                                <div
+                                                  key={index}
+                                                  className={`image-item ${selectedImage4 === image ? "selected" : ""}`}
+                                                  onClick={() => setSelectedImage4(image)}
+                                                >
+                                                  <img src={image} alt="" className="modalImage" />
+                                                </div>
+                                              ))}
+                                            </div>
+                                          </Modal>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table
+                                    className="mcnCaptionRightTextContentContainer"
+                                    align="right"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    width={264}
+                                  >
+                                    <tbody>
+                                      <tr>
+                                        <td
+                                          valign="top"
+                                          className="mcnTextContent"
+                                        >
+                                          {/* <h3>Upcoming events</h3> */}
+                                          <p>
+                                            {data.body6}
+                                          </p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </center>
+    </>
+  );
+}
+
+export default Template5;
